@@ -1,0 +1,40 @@
+{
+  "name": "svg-editor-cli",
+  "version": "1.0.0",
+  "description": "EIE50009.01 高级软件开发技术作业Lab1(个人Lab）",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "bin": {
+    "tscli": "./dist/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgliang/SVG-Editor-CLI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dgliang/SVG-Editor-CLI/issues"
+  },
+  "homepage": "https://github.com/dgliang/SVG-Editor-CLI#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "process": "^0.11.10"
+  }
+}
