@@ -33,6 +33,9 @@ class MockLeaf extends Shape {
     this.x = t.sx * this.x + t.tx;
     this.y = t.sy * this.y + t.ty;
   }
+  public positionAnchor(): string {
+    return `(${NumberFormat.format(this.x)},${NumberFormat.format(this.y)})`;
+  }
   public getAttr(attr: string): string | undefined {
     if (attr === 'x') return NumberFormat.format(this.x);
     if (attr === 'y') return NumberFormat.format(this.y);

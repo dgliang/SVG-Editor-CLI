@@ -91,6 +91,10 @@ export class Text extends Shape {
     return `(${NumberFormat.format(this.x)},${NumberFormat.format(this.y)})`;
   }
 
+  public positionAnchor(): string {
+    return this.geometryFields();
+  }
+
   public treeFields(): string {
     const base = `${this.geometryFields()} "${this.text}"`;
     const fill = this.styles.get('fill');

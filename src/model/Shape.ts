@@ -70,6 +70,12 @@ export abstract class Shape {
   /** show 命令的明细行数组。 */
   public abstract detailFields(): string[];
 
+  /**
+   * 位置锚点标签（move 回显用），如 '(130,100)'：
+   * rect/text 取 (x,y)，circle/ellipse 取 (cx,cy)，line 取 (x1,y1)；容器返回 null。
+   */
+  public abstract positionAnchor(): string | null;
+
   /** 产出 SVG 节点数据，由 SvgSerializer 消费。 */
   public abstract toSvgNode(): SvgNodeData;
 }

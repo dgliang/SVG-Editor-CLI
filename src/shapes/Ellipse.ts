@@ -97,6 +97,10 @@ export class Ellipse extends Shape {
       + ` rx=${NumberFormat.format(this.rx)} ry=${NumberFormat.format(this.ry)}`;
   }
 
+  public positionAnchor(): string {
+    return `(${NumberFormat.format(this.cx)},${NumberFormat.format(this.cy)})`;
+  }
+
   public treeFields(): string {
     const fill = this.styles.get('fill');
     return fill !== undefined ? `${this.geometryFields()} fill=${fill}` : this.geometryFields();

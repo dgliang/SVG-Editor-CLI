@@ -97,6 +97,10 @@ export class Line extends Shape {
       + ` -> (${NumberFormat.format(this.x2)},${NumberFormat.format(this.y2)})`;
   }
 
+  public positionAnchor(): string {
+    return `(${NumberFormat.format(this.x1)},${NumberFormat.format(this.y1)})`;
+  }
+
   public treeFields(): string {
     const fill = this.styles.get('fill');
     return fill !== undefined ? `${this.geometryFields()} fill=${fill}` : this.geometryFields();

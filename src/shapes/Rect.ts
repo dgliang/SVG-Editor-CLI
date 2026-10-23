@@ -102,6 +102,10 @@ export class Rect extends Shape {
       + ` w=${NumberFormat.format(this.width)} h=${NumberFormat.format(this.height)}`;
   }
 
+  public positionAnchor(): string {
+    return `(${NumberFormat.format(this.x)},${NumberFormat.format(this.y)})`;
+  }
+
   public treeFields(): string {
     // tree 行只内联几何 + fill（需求 5.1 transcript；line 的 stroke 不显示同此规则）
     const fill = this.styles.get('fill');

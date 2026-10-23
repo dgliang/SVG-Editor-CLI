@@ -95,6 +95,10 @@ export class Circle extends Shape {
     return fill !== undefined ? `${this.geometryFields()} fill=${fill}` : this.geometryFields();
   }
 
+  public positionAnchor(): string {
+    return `(${NumberFormat.format(this.cx)},${NumberFormat.format(this.cy)})`;
+  }
+
   public detailFields(): string[] {
     const lines = [this.geometryFields()];
     for (const key of STYLE_ORDER) {

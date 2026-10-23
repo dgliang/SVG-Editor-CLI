@@ -126,6 +126,11 @@ export class Group extends Shape {
     return '';
   }
 
+  /** 组没有自身坐标（transform 已扁平化），返回 null。 */
+  public positionAnchor(): string | null {
+    return null;
+  }
+
   public detailFields(): string[] {
     return [`children=${this.children.length}`];
   }
