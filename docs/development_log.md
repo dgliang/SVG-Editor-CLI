@@ -22,3 +22,10 @@ Step 3-3: io/SvgParser.ts (preserveOrder解析、id补全/重名警告、未支�
 Step 3-4: io/FileStore.ts + NodeFileStore.ts(错误文案转换)
 Step 3-5: test/io/单测(parser/serializer/round-trip/FileStore) 
 Step 3-6: build + test 全绿后单 commit
+# Step 4
+Step 4-1: Shape 加 positionAnchor() 抽象(move 回显锚点: rect/text (x,y)、circle/ellipse (cx,cy)、line (x1,y1)、组 null)，6 子类 + MockLeaf 实现
+Step 4-2: commands/Command.ts (Command 接口 + CommandResult) 与 CommandHistory (undo/redo 双栈 + io 锁固定文案、失败不入栈、新编辑清 redo 并解锁)
+Step 4-3: Create/Delete/Move/Scale/Set 命令(先校验后改树; Scale/Set 用快照 undo 避免浮点漂移与旧值缺省问题)
+Step 4-4: Group/Ungroup/AddTo/ZOrder 命令(锚点=首成员摘除后索引、祖先成环检查、undo 按原索引升序插回)
+Step 4-5: test/commands/ 单测(22+5 用例全绿: execute→undo→redo 往返、回显文案比对、失败不改状态、io 锁)
+Step 4-6: build + test 全绿后单 commit (25d9651)
