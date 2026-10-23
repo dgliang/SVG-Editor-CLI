@@ -15,3 +15,10 @@ Step 2-2: Circle / Ellipse / Line / Text 同模式实现
 Step 2-3: BuiltinShapes.ts 注册 6 个 provider
 Step 2-4: test/shapes/单测(30用例全绿)
 Step 2-5: build + test 全绿后单 commit (442be61)
+# Step 3
+Step 3-1: 装fast-xml-parser; model 加 Transform2D + Shape.applyTransform (move/scale委托)
+Step 3-2: io/SvgSerializer.ts(缩进/自闭合/转义/属性顺序/固定头部) 
+Step 3-3: io/SvgParser.ts (preserveOrder解析、id补全/重名警告、未支持标签跳过、transform 扁平化) 
+Step 3-4: io/FileStore.ts + NodeFileStore.ts(错误文案转换)
+Step 3-5: test/io/单测(parser/serializer/round-trip/FileStore) 
+Step 3-6: build + test 全绿后单 commit
