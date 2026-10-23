@@ -4,6 +4,7 @@ import { NumberFormat } from '../model/NumberFormat';
 import type { ShapeSnapshot } from '../model/ShapeSnapshot';
 import type { SvgNodeData } from '../model/SvgNodeData';
 import type { ParamSpec, ShapeProvider } from '../model/ShapeProvider';
+import type { Transform2D } from '../model/Transform2D';
 
 const STYLE_ORDER = ['fill', 'stroke', 'stroke-width'] as const;
 
@@ -34,17 +35,18 @@ export class Line extends Shape {
   }
 
   public move(dx: number, dy: number): void {
-    this.x1 += dx;
-    this.y1 += dy;
-    this.x2 += dx;
-    this.y2 += dy;
+    this.applyTransform({ sx: 1, sy: 1, tx: dx, ty: dy });
   }
 
   public scale(factor: number): void {
-    this.x1 *= factor;
-    this.y1 *= factor;
-    this.x2 *= factor;
-    this.y2 *= factor;
+    this.applyTransform({ sx: factor, sy: factor, tx: 0, ty: 0 });
+  }
+
+  public applyTransform(t: Transform2D): void {
+    this.x1 = t.sx * this.x1 + t.tx;
+    this.y1 = t.sy * this.y1 + t.ty;
+    this.x2 = t.sx * this.x2 + t.tx;
+    this.y2 = t.sy * this.y2 + t.ty;
   }
 
   public getAttr(attr: string): string | undefined {

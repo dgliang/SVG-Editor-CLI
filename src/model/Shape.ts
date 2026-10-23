@@ -1,6 +1,7 @@
 import type { Group } from './Group';
 import type { ShapeSnapshot } from './ShapeSnapshot';
 import type { SvgNodeData } from './SvgNodeData';
+import type { Transform2D } from './Transform2D';
 
 /**
  * 所有图形元素的抽象基类。叶子图形和 Group 都必须实现这些方法。
@@ -40,6 +41,12 @@ export abstract class Shape {
 
   /** 等比缩放，factor 必须正数；递归作用于容器的所有子孙。 */
   public abstract scale(factor: number): void;
+
+  /**
+   * 应用无旋转仿射变换（io 扁平化用）。move/scale 是它的特例；
+   * 递归作用于容器的所有子孙。
+   */
+  public abstract applyTransform(t: Transform2D): void;
 
   /** 读属性值；缺省（未显式设置）返回 undefined。 */
   public abstract getAttr(attr: string): string | undefined;

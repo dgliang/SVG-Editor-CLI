@@ -4,6 +4,7 @@ import { NumberFormat } from '../model/NumberFormat';
 import type { ShapeSnapshot } from '../model/ShapeSnapshot';
 import type { SvgNodeData } from '../model/SvgNodeData';
 import type { ParamSpec, ShapeProvider } from '../model/ShapeProvider';
+import type { Transform2D } from '../model/Transform2D';
 
 /** 公共样式属性的固定输出顺序（序列化与 show 明细一致）。 */
 const STYLE_ORDER = ['fill', 'stroke', 'stroke-width'] as const;
@@ -38,15 +39,18 @@ export class Rect extends Shape {
   }
 
   public move(dx: number, dy: number): void {
-    this.x += dx;
-    this.y += dy;
+    this.applyTransform({ sx: 1, sy: 1, tx: dx, ty: dy });
   }
 
   public scale(factor: number): void {
-    this.x *= factor;
-    this.y *= factor;
-    this.width *= factor;
-    this.height *= factor;
+    this.applyTransform({ sx: factor, sy: factor, tx: 0, ty: 0 });
+  }
+
+  public applyTransform(t: Transform2D): void {
+    this.x = t.sx * this.x + t.tx;
+    this.y = t.sy * this.y + t.ty;
+    this.width *= Math.abs(t.sx);
+    this.height *= Math.abs(t.sy);
   }
 
   public getAttr(attr: string): string | undefined {

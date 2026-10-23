@@ -4,6 +4,7 @@ import { NumberFormat } from '../model/NumberFormat';
 import type { ShapeSnapshot } from '../model/ShapeSnapshot';
 import type { SvgNodeData } from '../model/SvgNodeData';
 import type { ParamSpec, ShapeProvider } from '../model/ShapeProvider';
+import type { Transform2D } from '../model/Transform2D';
 
 const STYLE_ORDER = ['fill', 'stroke', 'stroke-width'] as const;
 
@@ -33,14 +34,17 @@ export class Text extends Shape {
   }
 
   public move(dx: number, dy: number): void {
-    this.x += dx;
-    this.y += dy;
+    this.applyTransform({ sx: 1, sy: 1, tx: dx, ty: dy });
   }
 
   public scale(factor: number): void {
-    // 只缩放位置；字号不在本期模型内
-    this.x *= factor;
-    this.y *= factor;
+    this.applyTransform({ sx: factor, sy: factor, tx: 0, ty: 0 });
+  }
+
+  public applyTransform(t: Transform2D): void {
+    // 只变换位置；字号不在本期模型内
+    this.x = t.sx * this.x + t.tx;
+    this.y = t.sy * this.y + t.ty;
   }
 
   public getAttr(attr: string): string | undefined {

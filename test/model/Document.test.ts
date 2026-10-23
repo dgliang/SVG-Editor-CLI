@@ -5,6 +5,7 @@ import { Document } from '../../src/model/Document';
 import { DomainError } from '../../src/model/DomainError';
 import type { ShapeSnapshot } from '../../src/model/ShapeSnapshot';
 import type { SvgNodeData } from '../../src/model/SvgNodeData';
+import type { Transform2D } from '../../src/model/Transform2D';
 import { NumberFormat } from '../../src/model/NumberFormat';
 
 /** 测试用最小叶子图形：一个 x/y/label。 */
@@ -27,6 +28,10 @@ class MockLeaf extends Shape {
   public scale(factor: number): void {
     this.x *= factor;
     this.y *= factor;
+  }
+  public applyTransform(t: Transform2D): void {
+    this.x = t.sx * this.x + t.tx;
+    this.y = t.sy * this.y + t.ty;
   }
   public getAttr(attr: string): string | undefined {
     if (attr === 'x') return NumberFormat.format(this.x);

@@ -1,6 +1,7 @@
 import { Shape } from './Shape';
 import { DomainError } from './DomainError';
 import type { SvgNodeData } from './SvgNodeData';
+import type { Transform2D } from './Transform2D';
 
 /** Group 的快照：父级快照 + 子级快照数组（按当前顺序）。 */
 interface GroupSnapshot {
@@ -78,6 +79,12 @@ export class Group extends Shape {
   public scale(factor: number): void {
     for (const child of this.children) {
       child.scale(factor);
+    }
+  }
+
+  public applyTransform(t: Transform2D): void {
+    for (const child of this.children) {
+      child.applyTransform(t);
     }
   }
 

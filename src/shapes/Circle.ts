@@ -4,6 +4,7 @@ import { NumberFormat } from '../model/NumberFormat';
 import type { ShapeSnapshot } from '../model/ShapeSnapshot';
 import type { SvgNodeData } from '../model/SvgNodeData';
 import type { ParamSpec, ShapeProvider } from '../model/ShapeProvider';
+import type { Transform2D } from '../model/Transform2D';
 
 const STYLE_ORDER = ['fill', 'stroke', 'stroke-width'] as const;
 
@@ -31,14 +32,18 @@ export class Circle extends Shape {
   }
 
   public move(dx: number, dy: number): void {
-    this.cx += dx;
-    this.cy += dy;
+    this.applyTransform({ sx: 1, sy: 1, tx: dx, ty: dy });
   }
 
   public scale(factor: number): void {
-    this.cx *= factor;
-    this.cy *= factor;
-    this.r *= factor;
+    this.applyTransform({ sx: factor, sy: factor, tx: 0, ty: 0 });
+  }
+
+  public applyTransform(t: Transform2D): void {
+    this.cx = t.sx * this.cx + t.tx;
+    this.cy = t.sy * this.cy + t.ty;
+    // 非等比缩放无法被 circle 表示（会变成椭圆），取两轴均值近似
+    this.r *= (Math.abs(t.sx) + Math.abs(t.sy)) / 2;
   }
 
   public getAttr(attr: string): string | undefined {
