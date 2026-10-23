@@ -202,6 +202,10 @@ export class Document {
       throw new DomainError(`cannot addto a container into its own descendant: ${shape.id}`);
     }
     const oldParent = shape.parent;
+    // 同父且无显式位置：no-op，避免被静默挪到末尾改变 z-order
+    if (oldParent === newParent && index === undefined) {
+      return;
+    }
     const oldIndex = oldParent.indexOf(shape);
     // 从旧父移除（保留 index 供 undo）
     oldParent.removeChildAt(oldIndex);

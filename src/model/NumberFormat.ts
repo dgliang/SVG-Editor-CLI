@@ -1,3 +1,5 @@
+import { DomainError } from './DomainError';
+
 /**
  * 数字解析与稳定格式化：
  * - 内部一律 number；CLI 参数用严格解析，非法抛 DomainError
@@ -5,18 +7,15 @@
  * - 输出统一 format()：最多 6 位小数、去掉尾随 0、-0 归一为 0
  */
 export class NumberFormat {
-  /** 严格解析：纯数字字符串，失败抛 DomainError。 */
+  /** 严格解析：纯数字字符串，失败抛 DomainError（文案匹配需求 4.4）。 */
   static parseStrict(token: string): number {
     const trimmed = token.trim();
-    if (trimmed.length === 0) {
-      throw new Error('empty number token');
-    }
     if (!/^-?\d+(\.\d+)?$/.test(trimmed)) {
-      throw new Error(`invalid number: ${token}`);
+      throw new DomainError(`invalid number: ${token}`);
     }
     const n = Number(trimmed);
     if (!Number.isFinite(n)) {
-      throw new Error(`invalid number: ${token}`);
+      throw new DomainError(`invalid number: ${token}`);
     }
     return n;
   }
