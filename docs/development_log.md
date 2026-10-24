@@ -34,4 +34,4 @@ Step 5-1: view/TreeRenderer.ts(全文档 `svg (WxH)` 根行、├──/└─�
 Step 5-2: view/ShapeDetailRenderer.ts(parent 标签: 根级显示 svg、明细缩进 2 空格; 字段来自 detailFields)
 Step 5-3: app/Editor.ts(门面: init/read/save/canvas + providerFor + execute/undo/redo; 文档类命令 truncateAndLock、canvas 只读不锁)
 Step 5-4: test/view 与 test/app 单测(19 用例: tree 逐字比对需求 5.1、show 示例、Editor 文件往返与 io 锁)
-Step 5-5: build + test 全绿后单 commit
+Step 5-5: build + test 全绿后单 commit (c78ff32)
