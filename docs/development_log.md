@@ -43,3 +43,10 @@ Step 6-4: cli/CommandDispatcher.ts(Map 分派, unknown command) + cli/BuiltinHan
 Step 6-5: cli/Repl.ts(注入 AsyncIterable 与输出函数; 注释/空行忽略; DomainError → error: 行) + src/index.ts 组合根
 Step 6-6: test/cli/ 单测(Tokenizer 7 + Repl 会话 7) + 管道冒烟(init/create/tree/show/move/undo/save/read)
 Step 6-7: build + test 全绿后单 commit (09861c0)
+# Step 7
+Step 7-1: test/support/session.ts(内存 FileStore + 假终端 + runSession)，Repl/Editor 测试改为复用
+Step 7-2: test/integration/Transcript.test.ts(需求 §6 完整会话，34 行输出逐字比对)
+Step 7-3: .dependency-cruiser.cjs(模块矩阵 + model 无 npm 依赖 + 运行时无环; Shape↔Group type-only 回路豁免并注明)
+Step 7-4: package.json test = vitest + deps:check，新增 test:unit
+Step 7-5: docs/README.md(架构方案/过程记录/一致性自查/质量保证/修订记录)
+Step 7-6: build + test 全绿后 commit 并打 final tag

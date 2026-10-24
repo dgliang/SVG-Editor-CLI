@@ -13,8 +13,9 @@
   "scripts": {
     "cli": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
-    "test": "vitest run",
-    "deps:check": "echo \"deps:check placeholder (dependency-cruiser to be added later)\"",
+    "test": "vitest run && npm run deps:check",
+    "test:unit": "vitest run",
+    "deps:check": "depcruise src --config .dependency-cruiser.cjs",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -32,6 +33,7 @@
   "homepage": "https://github.com/dgliang/SVG-Editor-CLI#readme",
   "devDependencies": {
     "@types/node": "^26.6.5",
+    "dependency-cruiser": "^18.7.0",
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",

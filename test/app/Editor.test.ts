@@ -5,24 +5,8 @@ import { CreateCommand } from '../../src/commands/CreateCommand';
 import { MoveCommand } from '../../src/commands/MoveCommand';
 import { NodeFileStore } from '../../src/io/NodeFileStore';
 import { SvgParser } from '../../src/io/SvgParser';
-import type { FileStore } from '../../src/io/FileStore';
 import { SvgSerializer } from '../../src/io/SvgSerializer';
-import { DomainError } from '../../src/model/DomainError';
-
-/** 内存文件存储，避免测试碰真实磁盘。 */
-class MemoryFileStore implements FileStore {
-  public readonly files = new Map<string, string>();
-
-  public readText(path: string): string {
-    const text = this.files.get(path);
-    if (text === undefined) throw new DomainError(`cannot read file: ${path}`);
-    return text;
-  }
-
-  public writeText(path: string, text: string): void {
-    this.files.set(path, text);
-  }
-}
+import { MemoryFileStore } from '../support/session';
 
 const OTHER_SVG = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
