@@ -1,22 +1,40 @@
-#!/usr/bin/env node
+import * as readline from 'node:readline';
+import { Editor } from './app/Editor';
+import { createBuiltinHandlers } from './cli/BuiltinHandlers';
+import { CommandDispatcher } from './cli/CommandDispatcher';
+import { Repl } from './cli/Repl';
+import type { ReplIo } from './cli/Repl';
+import { CommandHistory } from './commands/CommandHistory';
+import { NodeFileStore } from './io/NodeFileStore';
+import { SvgParser } from './io/SvgParser';
+import { SvgSerializer } from './io/SvgSerializer';
 
-import process from 'process';
+/**
+ * 组合根：装配文件存储、编辑器、分派器与 REPL。
+ * 只在这里出现具体实现的实例化；其他模块只认接口。
+ */
+const editor = new Editor(
+  new NodeFileStore(),
+  new SvgParser(),
+  new SvgSerializer(),
+  new CommandHistory(),
+);
+const dispatcher = new CommandDispatcher(createBuiltinHandlers());
 
-// 读取命令行参数
-const args = process.argv.slice(2);
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
-async function main() {
-  console.log("✅ TS CLI 启动成功");
-  console.log("收到参数：", args);
+const io: ReplIo = {
+  write: (text) => {
+    process.stdout.write(text);
+  },
+  print: (lines) => {
+    for (const line of lines) process.stdout.write(`${line}\n`);
+  },
+  lines: rl,
+};
 
-  if (args.includes("--help")) {
-    console.log(`
-使用示例：
-  tscli hello
-  tscli --help
-    `);
-    return;
-  }
-}
+rl.on('SIGINT', () => {
+  rl.close();
+});
 
-main().catch(console.error);
+void new Repl(dispatcher, editor, io).run();

@@ -35,3 +35,11 @@ Step 5-2: view/ShapeDetailRenderer.ts(parent 标签: 根级显示 svg、明细�
 Step 5-3: app/Editor.ts(门面: init/read/save/canvas + providerFor + execute/undo/redo; 文档类命令 truncateAndLock、canvas 只读不锁)
 Step 5-4: test/view 与 test/app 单测(19 用例: tree 逐字比对需求 5.1、show 示例、Editor 文件往返与 io 锁)
 Step 5-5: build + test 全绿后单 commit (c78ff32)
+# Step 6
+Step 6-1: cli/Tokenizer.ts(双引号保留空格 + quoted 标记; 未闭合引号容错)
+Step 6-2: cli/CommandHandler.ts(接口 + BaseHandler: usage / invalid number / 画布尺寸正数校验)
+Step 6-3: cli/handlers/ 19 个 handler(create 的 in 子句仅在未加引号时识别; front/back 各一类; help 清单)
+Step 6-4: cli/CommandDispatcher.ts(Map 分派, unknown command) + cli/BuiltinHandlers.ts(命令清单，组合根与测试复用)
+Step 6-5: cli/Repl.ts(注入 AsyncIterable 与输出函数; 注释/空行忽略; DomainError → error: 行) + src/index.ts 组合根
+Step 6-6: test/cli/ 单测(Tokenizer 7 + Repl 会话 7) + 管道冒烟(init/create/tree/show/move/undo/save/read)
+Step 6-7: build + test 全绿后单 commit
