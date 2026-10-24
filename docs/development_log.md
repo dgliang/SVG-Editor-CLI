@@ -29,3 +29,9 @@ Step 4-3: Create/Delete/Move/Scale/Set 命令(先校验后改树; Scale/Set 用�
 Step 4-4: Group/Ungroup/AddTo/ZOrder 命令(锚点=首成员摘除后索引、祖先成环检查、undo 按原索引升序插回)
 Step 4-5: test/commands/ 单测(22+5 用例全绿: execute→undo→redo 往返、回显文案比对、失败不改状态、io 锁)
 Step 4-6: build + test 全绿后单 commit (25d9651)
+# Step 5
+Step 5-1: view/TreeRenderer.ts(全文档 `svg (WxH)` 根行、├──/└── 连接符、│ 前缀延续、同份输出按最宽标签全局对齐、tree <id> 子树重画)
+Step 5-2: view/ShapeDetailRenderer.ts(parent 标签: 根级显示 svg、明细缩进 2 空格; 字段来自 detailFields)
+Step 5-3: app/Editor.ts(门面: init/read/save/canvas + providerFor + execute/undo/redo; 文档类命令 truncateAndLock、canvas 只读不锁)
+Step 5-4: test/view 与 test/app 单测(19 用例: tree 逐字比对需求 5.1、show 示例、Editor 文件往返与 io 锁)
+Step 5-5: build + test 全绿后单 commit
