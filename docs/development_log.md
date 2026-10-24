@@ -42,4 +42,4 @@ Step 6-3: cli/handlers/ 19 个 handler(create 的 in 子句仅在未加引号时
 Step 6-4: cli/CommandDispatcher.ts(Map 分派, unknown command) + cli/BuiltinHandlers.ts(命令清单，组合根与测试复用)
 Step 6-5: cli/Repl.ts(注入 AsyncIterable 与输出函数; 注释/空行忽略; DomainError → error: 行) + src/index.ts 组合根
 Step 6-6: test/cli/ 单测(Tokenizer 7 + Repl 会话 7) + 管道冒烟(init/create/tree/show/move/undo/save/read)
-Step 6-7: build + test 全绿后单 commit
+Step 6-7: build + test 全绿后单 commit (09861c0)
