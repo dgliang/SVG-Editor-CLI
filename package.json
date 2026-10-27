@@ -4,7 +4,7 @@
   "description": "EIE50009.01 高级软件开发技术作业Lab1(个人Lab）",
   "main": "index.js",
   "directories": {
-    "doc": "docs",
+    "doc": "doc",
     "test": "test"
   },
   "bin": {

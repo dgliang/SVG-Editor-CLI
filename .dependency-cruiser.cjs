@@ -1,5 +1,5 @@
 /**
- * 依赖方向检查（对应 docs/design.md §8 的模块依赖矩阵）。
+ * 依赖方向检查（对应 doc/design.md §8 的模块依赖矩阵）。
  * 允许的方向：
  *   model    ← 所有模块（model 自身无依赖，除标准库无外部包）
  *   shapes   ← app, index
